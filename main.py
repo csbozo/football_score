@@ -41,6 +41,9 @@ async def main():
 
     leagues_to_download = parsing()  # getting commands from the cli
     print(leagues_to_download)
+    all_team_names = []
+    all_manager_info = []
+    all_player_lists = []
 
     for league in leagues_to_download:  # iterating league links
         league_name = cfg.TOP_LEAGUES_URLS[league].split("/")[-2]
@@ -51,15 +54,31 @@ async def main():
         watch = tqdm(total=len(teams), position=0)
         for team_url in teams:  # iterating all teams urls
             team_name = team_url.split('/')[-2]
-            print(team_name)
-            manager_url = await hp.extract_mgr_url(team_url)  # Assumindo que extract_mgr_url é async
+            manager_url = await hp.extract_mgr_url(team_url)
             manager_info = hp.extract_mgr_info(manager_url)  # extract_mgr_info não é async, então não precisa de await
 
             players_list = await hp.extract_players_urls(team_url)  # extracting player url which
 
+            all_team_names.append(team_name)
+            all_manager_info.append(manager_info)
+            all_player_lists.append(players_list)
+
+            print(team_name)
             print(manager_info)
             print(players_list)
             watch.update(1)
+        watch.close()
+    with open("team_name.txt", mode='w', encoding='utf-8') as arquivo:
+        arquivo.write("\n".join(all_team_names))
+
+    with open("list_manager_info.txt", mode='w', encoding='utf-8') as arquivo:
+        arquivo.write("\n".join(str(item) for item in all_manager_info))
+
+    with open("list_player_list.txt", mode='w', encoding='utf-8') as arquivo:
+        all_player_urls = []
+        for sublist in all_player_lists:
+            all_player_urls.extend(sublist)  # Usa extend para adicionar todos os itens de uma sublista
+        arquivo.write("\n".join(all_player_urls))
 
 
 if __name__ == '__main__':
