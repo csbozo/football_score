@@ -16,6 +16,7 @@ def parsing():
     parser.add_argument("-p", "--PremierLeague", help="download English league players", action="store_true")
     parser.add_argument("-l", "--LaLiga", help="download Spanish league players", action="store_true")
     parser.add_argument("-b", "--BundesLiga", help="download German league players", action="store_true")
+    parser.add_argument("-cwc", "--FifaClubWorldCup", help="download Fifa Club World Cup players", action="store_true")
     args = parser.parse_args()
 
     if args.SerieA:
@@ -26,6 +27,8 @@ def parsing():
         leagues.append("laliga")
     if args.BundesLiga:
         leagues.append("bundes")
+    if args.FifaClubWorldCup:
+        leagues.append("clubcup")
 
     return leagues
 
