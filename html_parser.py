@@ -70,10 +70,10 @@ async def extract_players_urls(team_url):
 
         team_html = BeautifulSoup(await page.content(), 'html.parser')
 
-        all_players_html = team_html.find_all("div", class_="p_xs")
+        all_players_html = team_html.find_all("div", class_="xYoiw")
         html_list = str(all_players_html).split()
         for line in html_list:
-            if "href" in line:
+            if 'href="/football/player' in line:
                 players_list.append(extract_player_info("https://www.sofascore.com" + line.split("\"")[1]))
     finally:
         await browser.close()
@@ -89,10 +89,11 @@ async def extract_mgr_url(team_url):
         # await page.wait_for_selector('div.Content-sc-1o55eay-0.styles__ManagerContent-qlwzq-9.dxQrED')
 
         soup = BeautifulSoup(await page.content(), 'html.parser')
-        mgr_html = soup.find('div', class_="d_flex ai_center jc_space-between px_lg py_sm")
+
+        mgr_html = soup.find_all('div', class_="fPSBzf bYPztT dJhvhl")
         if mgr_html:
             for line in str(mgr_html).split():
-                if "href" in line:
+                if 'href' in line:
                     mgr_link = "https://www.sofascore.com" + line.split("\"")[1]
     finally:
         await browser.close()
@@ -105,17 +106,18 @@ def extract_mgr_info(manager_url):
     try:
         mgr_dict = {}
         mgr_soup = BeautifulSoup(requests.get(manager_url).text, 'html.parser')
-        mgr_dict['name'] = mgr_soup.find('h2', class_="textStyle_display.extraLarge c_neutrals.nLv1 m_0").get_text()
-        mgr_dict['nationality'] = mgr_soup.find('div', class_="d_flex ai_center jc_center gap_xs").get_text()
-        values_list = arrow_manipu(str(mgr_soup.find_all('div', class_="d_flex flex-wrap_wrap")))
-        mgr_dict['birth_date'] = values_list[28]
-        mgr_dict['pref. formation'] = values_list[44]
-        mgr_dict['matches'] = values_list[56]
-        mgr_dict['avg_points_per_game'] = values_list[68]
-        values_list_2 = arrow_manipu(str(mgr_soup.find_all('div', class_="d_flex gap_sm")))
-        mgr_dict['games_won'] = values_list_2[8]
-        mgr_dict['games_drawn'] = values_list_2[12]
-        mgr_dict['games_lost'] = values_list_2[16]
+        mgr_dict['name'] = mgr_soup.find('h2', class_="hiWfit fdnFeu AxjtB").get_text()
+        mgr_dict['nationality'] = mgr_soup.find('div', class_="fPSBzf bYPztT bYPznK fIXqzZ").get_text()
+        values_list = arrow_manipu(str(mgr_soup.find_all('div', class_="fPSBzf iRgpoQ eluWnz dVzwSc eTCxQp")))
+        mgr_dict['nationality'] = values_list[46]
+        mgr_dict['birth_date'] = values_list[58]
+        mgr_dict['pref. formation'] = values_list[74]
+        mgr_dict['matches'] = values_list[86]
+        mgr_dict['avg_points_per_game'] = values_list[98]
+        values_list_2 = arrow_manipu(str(mgr_soup.find_all('div', class_="fPSBzf iRgpoQ fIXqzZ fzBPom")))
+        mgr_dict['games_won'] = values_list_2[6]
+        mgr_dict['games_drawn'] = values_list_2[10]
+        mgr_dict['games_lost'] = values_list_2[14]
     except Exception:
         return None
 
@@ -129,7 +131,7 @@ async def extract_teams_urls(league_url):
         await page.goto(league_url)
         team_html = BeautifulSoup(await page.content(), 'html.parser')
 
-        all_teams_html = team_html.find_all("div", class_="d_flex flex-wrap_wrap gap_md py_md")
+        all_teams_html = team_html.find_all("div", class_="fRBCCw dWrslz xEQIz jklOan kcXxyF bgHNmC jTWvec")
         html_list = str(all_teams_html).split()
         for line in html_list:
             is_line_with_link = "href=\"/team" in line and not line.endswith("img")
@@ -158,8 +160,8 @@ async def main():
     mgr_url = await extract_mgr_url(team_url_example)
     if mgr_url:
         print(f"URL do gerente: {mgr_url}")
-        mgr_info = extract_mgr_info(mgr_url)
         print("Informações do gerente:")
+        mgr_info = extract_mgr_info(mgr_url)
         print(mgr_info)
     else:
         print("URL do gerente não encontrada.")
