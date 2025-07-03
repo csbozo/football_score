@@ -1,2 +1,0 @@
-{'name': 'Arne Slot', 'nationality': 'NED', 'birth_date': '17 Sept 1978', 'pref. formation': '4-2-3-1', 'matches': '266', 'avg_points_per_game': '2.11', 'games_won': '38', 'games_drawn': '9', 'games_lost': '9'}
-{'name': 'Rúben Amorim', 'nationality': 'POR', 'birth_date': '27 Jan 1985', 'pref. formation': '3-4-2-1', 'matches': '290', 'avg_points_per_game': '2.16', 'games_won': '17', 'games_drawn': '8', 'games_lost': '17'}
