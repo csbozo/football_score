@@ -30,7 +30,7 @@ async def get_browser_page():
     playwright = await async_playwright().start()
     # Escolha um User-Agent aleatório
     selected_user_agent = random.choice(user_agents)
-    browser = await playwright.chromium.launch(headless=False)
+    browser = await playwright.chromium.launch(headless=True)
     # Passe o User-Agent ao criar o contexto da página
     page = await browser.new_page(user_agent=selected_user_agent)
     return browser, page
