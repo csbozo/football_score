@@ -6,6 +6,7 @@ import asyncio
 import config as cfg
 import random
 
+
 user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 "
@@ -84,6 +85,7 @@ async def extract_players_urls(team_url):
     browser, page = await get_browser_page()
     try:
         await page.goto(team_url)
+        await asyncio.sleep(random.uniform(2, 5))
         # Opcional: esperar por um elemento específico para garantir que o JS carregou
         # await page.wait_for_selector("a.styles__CardWrapper-sc-1dlv1k5-15")
 
@@ -104,6 +106,7 @@ async def extract_mgr_url(team_url):
     browser, page = await get_browser_page()
     try:
         await page.goto(team_url)
+        await asyncio.sleep(random.uniform(2, 5))
         # Opcional: esperar por um elemento específico
         # await page.wait_for_selector('div.Content-sc-1o55eay-0.styles__ManagerContent-qlwzq-9.dxQrED')
 
@@ -148,6 +151,7 @@ async def extract_teams_urls(league_url):
     browser, page = await get_browser_page()
     try:
         await page.goto(league_url)
+        await asyncio.sleep(random.uniform(2, 5))
         team_html = BeautifulSoup(await page.content(), 'html.parser')
         all_teams_html = team_html.find_all("div", class_="fPSBzf bYPztT xYowp gnlqYH hYZFkb")
         html_list = str(all_teams_html).split()
@@ -167,6 +171,7 @@ async def extract_teams_urls_new(league_url):
     browser, page = await get_browser_page()
     try:
         await page.goto(league_url)
+        await asyncio.sleep(random.uniform(2, 5))
         # Opcional: esperar por um elemento específico
         # await page.wait_for_selector('div.Content-sc-1o55eay-0.styles__ManagerContent-qlwzq-9.dxQrED')
         soup = BeautifulSoup(await page.content(), 'html.parser')
