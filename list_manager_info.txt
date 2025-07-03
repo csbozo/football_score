@@ -1,20 +1,2 @@
-{'name': 'Ernesto Valverde', 'nationality': 'ESP', 'birth_date': '9 Feb 1964', 'pref. formation': '4-2-3-1', 'matches': '888', 'avg_points_per_game': '1.80', 'games_won': '74', 'games_drawn': '36', 'games_lost': '36'}
-{'name': 'Diego Simeone', 'nationality': 'ARG', 'birth_date': '28 Apr 1970', 'pref. formation': '4-4-2', 'matches': '945', 'avg_points_per_game': '1.92', 'games_won': '437', 'games_drawn': '159', 'games_lost': '142'}
-{'name': 'Hans-Dieter Flick', 'nationality': 'GER', 'birth_date': '24 Feb 1965', 'pref. formation': '4-2-3-1', 'matches': '366', 'avg_points_per_game': '1.94', 'games_won': '44', 'games_drawn': '7', 'games_lost': '9'}
-None
-{'name': 'Eduardo Coudet', 'nationality': 'ARG', 'birth_date': '12 Sept 1974', 'pref. formation': '4-1-3-2', 'matches': '429', 'avg_points_per_game': '1.64', 'games_won': '6', 'games_drawn': '10', 'games_lost': '8'}
-{'name': 'Eder Sarabia Armesto', 'nationality': 'ESP', 'birth_date': '12 Jan 1981', 'pref. formation': '4-3-3', 'matches': '181', 'avg_points_per_game': '1.52', 'games_won': '25', 'games_drawn': '11', 'games_lost': '10'}
-{'name': 'Manolo Gonzalez', 'nationality': 'ESP', 'birth_date': '14 Jan 1979', 'pref. formation': '4-4-2', 'matches': '468', 'avg_points_per_game': '1.44', 'games_won': '18', 'games_drawn': '18', 'games_lost': '20'}
-{'name': 'José Bordalás', 'nationality': 'ESP', 'birth_date': '5 Mar 1964', 'pref. formation': '4-4-2', 'matches': '690', 'avg_points_per_game': '1.49', 'games_won': '31', 'games_drawn': '24', 'games_lost': '37'}
-{'name': 'Michel', 'nationality': 'ESP', 'birth_date': '30 Oct 1975', 'pref. formation': '4-1-4-1', 'matches': '328', 'avg_points_per_game': '1.48', 'games_won': '81', 'games_drawn': '33', 'games_lost': '67'}
-None
-{'name': 'Jagoba Arrasate', 'nationality': 'ESP', 'birth_date': '22 Apr 1978', 'pref. formation': '4-2-3-1', 'matches': '503', 'avg_points_per_game': '1.41', 'games_won': '13', 'games_drawn': '9', 'games_lost': '18'}
-{'name': 'Alessio Lisci', 'nationality': 'ITA', 'birth_date': '4 Nov 1985', 'pref. formation': '5-3-2', 'matches': '147', 'avg_points_per_game': '1.42', 'games_won': '37', 'games_drawn': '23', 'games_lost': '31'}
-None
-{'name': 'Manuel Pellegrini', 'nationality': 'CHI', 'birth_date': '16 Sept 1953', 'pref. formation': '4-2-3-1', 'matches': '1160', 'avg_points_per_game': '1.71', 'games_won': '121', 'games_drawn': '64', 'games_lost': '71'}
-{'name': 'Xabi Alonso', 'nationality': 'ESP', 'birth_date': '25 Nov 1981', 'pref. formation': '3-4-2-1', 'matches': '242', 'avg_points_per_game': '1.87', 'games_won': '3', 'games_drawn': '1', 'games_lost': '0'}
-{'name': 'Veljko Paunović', 'nationality': 'SRB', 'birth_date': '21 Aug 1977', 'pref. formation': '4-2-3-1', 'matches': '355', 'avg_points_per_game': '1.46', 'games_won': '9', 'games_drawn': '4', 'games_lost': '1'}
-None
-{'name': 'Matías Almeyda', 'nationality': 'ARG', 'birth_date': '21 Dec 1973', 'pref. formation': '4-2-3-1', 'matches': '545', 'avg_points_per_game': '1.63', 'games_won': '80', 'games_drawn': '24', 'games_lost': '30'}
-{'name': 'Carlos Corberán', 'nationality': 'ESP', 'birth_date': '7 Apr 1983', 'pref. formation': '4-2-3-1', 'matches': '267', 'avg_points_per_game': '1.48', 'games_won': '11', 'games_drawn': '7', 'games_lost': '6'}
-{'name': 'Marcelino', 'nationality': 'ESP', 'birth_date': '14 Aug 1965', 'pref. formation': '4-4-2', 'matches': '757', 'avg_points_per_game': '1.63', 'games_won': '36', 'games_drawn': '19', 'games_lost': '17'}
+{'name': 'Arne Slot', 'nationality': 'NED', 'birth_date': '17 Sept 1978', 'pref. formation': '4-2-3-1', 'matches': '266', 'avg_points_per_game': '2.11', 'games_won': '38', 'games_drawn': '9', 'games_lost': '9'}
+{'name': 'Rúben Amorim', 'nationality': 'POR', 'birth_date': '27 Jan 1985', 'pref. formation': '3-4-2-1', 'matches': '290', 'avg_points_per_game': '2.16', 'games_won': '17', 'games_drawn': '8', 'games_lost': '17'}

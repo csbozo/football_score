@@ -4,15 +4,9 @@ import config as cfg
 
 
 def get_info_from_api(team_name):
-    """
-    getting some additional information about the teams and enriching our database
-    thanks to the free API from thesportsdb.com/api.php
-    :param team_name: team of the name to download more info to
-    :return: a dictionary with some extra info about the team.
-    """
     if "-" in team_name:
         team_name = team_name.replace("-", "+")
-    if "brighton" in team_name:     # some teams has different names than in sofa-score
+    if "brighton" in team_name:
         team_name = "brighton"
     if "leicester" in team_name:
         team_name = "leicester"
