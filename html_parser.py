@@ -4,6 +4,16 @@ from dateutil.parser import parse
 from playwright.async_api import async_playwright
 import asyncio
 import config as cfg
+import random
+
+user_agents = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 "
+    "Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:127.0) Gecko/20100101 Firefox/127.0",
+    # Adicione mais User-Agents reais aqui
+]
 
 arrow_manipu = lambda x: x.replace("<", ">").split(">")
 
@@ -11,9 +21,18 @@ arrow_manipu = lambda x: x.replace("<", ">").split(">")
 async def get_browser_page():
     # Inicia o Playwright e lança o navegador Chromium
     # headless=True para não abrir uma janela visível do navegador
+
+    # playwright = await async_playwright().start()
+    # browser = await playwright.chromium.launch(headless=True)
+    # page = await browser.new_page()
+    # return browser, page
+
     playwright = await async_playwright().start()
-    browser = await playwright.chromium.launch(headless=True)
-    page = await browser.new_page()
+    # Escolha um User-Agent aleatório
+    selected_user_agent = random.choice(user_agents)
+    browser = await playwright.chromium.launch(headless=False)
+    # Passe o User-Agent ao criar o contexto da página
+    page = await browser.new_page(user_agent=selected_user_agent)
     return browser, page
 
 
@@ -134,7 +153,7 @@ async def extract_teams_urls(league_url):
         html_list = str(all_teams_html).split()
         for line in html_list:
             is_line_with_link = "href=\"/team" in line and not line.endswith("img")
-            #is_line_with_link = "href=" in line and not line.endswith("img")
+            # is_line_with_link = "href=" in line and not line.endswith("img")
             if is_line_with_link:
                 team_list.append("https://www.sofascore.com" + line.replace("\"", "").split("=")[-1].split(">")[0])
     finally:
