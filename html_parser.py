@@ -19,10 +19,11 @@ async def get_browser_page():
 
 def extract_player_info(player_url):
     """
-    Starting from the url of a player's page on https://www.sofascore.com, the function extracts
-    the most interesting infos about him, if available, and returns them in a dict.
-    :param player_url: url of the player on https://www.sofascore.com site.
-    :return: dict with this keys: [Name, Nationality, birth-date, Height, Preferred Foot, Position, Shirt Number, Average site rating]
+    A função extrai as informações mais interessantes de um jogador, se disponíveis, a partir da URL da página
+    do jogador em https://www.sofascore.com, e as retorna em um dicionário.
+    player_url: URL do jogador no site https://www.sofascore.com.
+    Retorna: Dicionário com as seguintes chaves: Nome, Nacionalidade, Data de Nascimento,
+    Altura, Pé Preferencial, Posição, Número da Camisa, Média de Avaliação no Site.
     """
     player_dict = {}
     player_html = BeautifulSoup(requests.get(player_url).text, 'html.parser')

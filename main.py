@@ -1,9 +1,9 @@
 import config as cfg
 import html_parser as hp  # Assumindo que este módulo contém as funções Playwright
-import api_data as api
 from tqdm import tqdm
 import argparse
 import asyncio  # Importar asyncio para lidar com funções assíncronas
+import json
 
 
 def parsing():
@@ -36,28 +36,28 @@ def parsing():
 # A função main() precisa ser assíncrona porque ela irá 'await' outras funções assíncronas
 async def main():
     """
-    this is main calling function to extract players data out of https://www.sofascore.com
+    essa main chama as funções para extrair os dados dos jogadores da origem https://www.sofascore.com
     """
 
-    leagues_to_download = parsing()  # getting commands from the cli
+    leagues_to_download = parsing()  # recebendo o comando CLI para capturar as ligas
     print(leagues_to_download)
     all_team_names = []
     all_manager_info = []
     all_player_lists = []
 
-    for league in leagues_to_download:  # iterating league links
+    for league in leagues_to_download:  # capturando a url das ligas
         league_name = cfg.TOP_LEAGUES_URLS[league].split("/")[-2]
 
-        teams = await hp.extract_teams_urls(cfg.TOP_LEAGUES_URLS[league])  # extracting teams out of leagues tables
+        teams = await hp.extract_teams_urls(cfg.TOP_LEAGUES_URLS[league])  # extraindo as urls das ligas
 
-        print("\ngetting teams from " + league_name)  # printing for user "loading" in addition to tqdm
+        print("\ngetting teams from " + league_name)  # exibindo o nome da liga a ser capturada
         watch = tqdm(total=len(teams), position=0)
-        for team_url in teams:  # iterating all teams urls
+        for team_url in teams:  # iterando todas as urls de time
             team_name = team_url.split('/')[-2]
             manager_url = await hp.extract_mgr_url(team_url)
             manager_info = hp.extract_mgr_info(manager_url)  # extract_mgr_info não é async, então não precisa de await
 
-            players_list = await hp.extract_players_urls(team_url)  # extracting player url which
+            players_list = await hp.extract_players_urls(team_url)  # extraindo url dos jogadores
 
             all_team_names.append(team_name)
             all_manager_info.append(manager_info)
@@ -75,10 +75,10 @@ async def main():
         arquivo.write("\n".join(str(item) for item in all_manager_info))
 
     with open("list_player_list.txt", mode='w', encoding='utf-8') as arquivo:
-        all_player_urls = []
-        for sublist in all_player_lists:
-            all_player_urls.extend(sublist)  # Usa extend para adicionar todos os itens de uma sublista
-        arquivo.write("\n".join(all_player_urls))
+        json_lines = []
+        for player_dict in all_player_lists:
+            json_lines.append(json.dumps(player_dict))  # Converte o dicionário para uma string JSON
+        arquivo.write("\n".join(json_lines))
 
 
 if __name__ == '__main__':
