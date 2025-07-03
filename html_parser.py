@@ -130,11 +130,11 @@ async def extract_teams_urls(league_url):
     try:
         await page.goto(league_url)
         team_html = BeautifulSoup(await page.content(), 'html.parser')
-
-        all_teams_html = team_html.find_all("div", class_="fRBCCw dWrslz xEQIz jklOan kcXxyF bgHNmC jTWvec")
+        all_teams_html = team_html.find_all("div", class_="fPSBzf bYPztT xYowp gnlqYH hYZFkb")
         html_list = str(all_teams_html).split()
         for line in html_list:
-            is_line_with_link = "href=\"/team" in line and not line.endswith("img")
+            #is_line_with_link = "href=\"/team" in line and not line.endswith("img")
+            is_line_with_link = "href=" in line and not line.endswith("img")
             if is_line_with_link:
                 team_list.append("https://www.sofascore.com" + line.replace("\"", "").split("=")[-1].split(">")[0])
     finally:
@@ -143,10 +143,29 @@ async def extract_teams_urls(league_url):
     return sorted_teams
 
 
+async def extract_teams_urls_new(league_url):
+    sorted_teams = ""
+    browser, page = await get_browser_page()
+    try:
+        await page.goto(league_url)
+        # Opcional: esperar por um elemento específico
+        # await page.wait_for_selector('div.Content-sc-1o55eay-0.styles__ManagerContent-qlwzq-9.dxQrED')
+        soup = BeautifulSoup(await page.content(), 'html.parser')
+        mgr_html = soup.find_all('div', class_="TabPanel bpHovE")
+
+        if mgr_html:
+            for line in str(mgr_html).split():
+                if 'href' in line:
+                    sorted_teams = "https://www.sofascore.com" + line.split("\"")[1]
+    finally:
+        await browser.close()
+    return sorted_teams
+
+
 async def main():
     print("Iniciando a extração de URLs de times...")
-    league_url_example = 'https://www.sofascore.com/tournament/football/england/premier-league/17'
-    teams = await extract_teams_urls(league_url_example)
+    league_url_example = 'https://www.sofascore.com/pt/torneio/futebol/england/premier-league/17'
+    teams = await extract_teams_urls_new(league_url_example)
     print(f"Número de times encontrados: {len(teams)}")
     print("Primeiros 5 times:", teams[:5])
 
