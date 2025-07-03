@@ -52,6 +52,7 @@ CLI Arg | Action
 -p | scrapes teams and players from Premier League
 -l | scrapes teams and players from La Liga
 -b | scrapes teams and players from Bundesliga
+-cwc | scrapes teams and player from FIFA Club World Cup
 
 The user can choose which league or combination of leagues to scrape and to create/update the database with.
 
