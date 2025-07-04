@@ -40,12 +40,13 @@ async def main():
     """
 
     leagues_to_download = parsing()  # recebendo o comando CLI para capturar as ligas
-    print(leagues_to_download)
+    #leagues_to_download = ['premier']
     all_team_names = []
     all_manager_info = []
     all_player_lists = []
 
     for league in leagues_to_download:  # capturando a url das ligas
+
         league_name = cfg.TOP_LEAGUES_URLS[league].split("/")[-2]
 
         teams = await hp.extract_teams_urls(cfg.TOP_LEAGUES_URLS[league])  # extraindo as urls das ligas

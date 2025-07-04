@@ -91,10 +91,10 @@ async def extract_players_urls(team_url):
 
         team_html = BeautifulSoup(await page.content(), 'html.parser')
 
-        all_players_html = team_html.find_all("div", class_="xYoiw")
+        all_players_html = team_html.find_all("div", class_="fRBCCw dWrslz xEQIz jklOan kcXxyF bgHNmC jTWvec")
         html_list = str(all_players_html).split()
         for line in html_list:
-            if 'href="/football/player' in line:
+            if 'football/player' in line:
                 players_list.append(extract_player_info("https://www.sofascore.com" + line.split("\"")[1]))
     finally:
         await browser.close()
@@ -153,12 +153,13 @@ async def extract_teams_urls(league_url):
         await page.goto(league_url)
         await asyncio.sleep(random.uniform(2, 5))
         team_html = BeautifulSoup(await page.content(), 'html.parser')
-        all_teams_html = team_html.find_all("div", class_="fPSBzf bYPztT xYowp gnlqYH hYZFkb")
+        all_teams_html = team_html.find_all('div', class_='TabPanel bpHovE')
         html_list = str(all_teams_html).split()
         for line in html_list:
-            is_line_with_link = "href=\"/team" in line and not line.endswith("img")
-            # is_line_with_link = "href=" in line and not line.endswith("img")
-            if is_line_with_link:
+            # is_line_with_link = "href=\"/team" in line and not line.endswith("img")
+            # is_line_with_link = '/pt/time/' in line and not line.endswith("img")
+            # if is_line_with_link:
+            if 'href="/pt/time/' in line:
                 team_list.append("https://www.sofascore.com" + line.replace("\"", "").split("=")[-1].split(">")[0])
     finally:
         await browser.close()
@@ -180,7 +181,6 @@ async def extract_teams_urls_new(league_url):
             for line in str(mgr_html).split():
                 if '/time/' in line:
                     sorted_teams = "https://www.sofascore.com" + line.split("\"")[1]
-                    print(line)
     finally:
         await browser.close()
     return sorted_teams
